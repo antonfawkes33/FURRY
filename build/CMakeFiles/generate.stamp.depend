@@ -1,0 +1,37 @@
+# CMake generation dependency list for this directory.
+C:/Program Files/CMake/share/cmake-4.2/Modules/CMakeCInformation.cmake
+C:/Program Files/CMake/share/cmake-4.2/Modules/CMakeCommonLanguageInclude.cmake
+C:/Program Files/CMake/share/cmake-4.2/Modules/CMakeGenericSystem.cmake
+C:/Program Files/CMake/share/cmake-4.2/Modules/CMakeInitializeConfigs.cmake
+C:/Program Files/CMake/share/cmake-4.2/Modules/CMakeLanguageInformation.cmake
+C:/Program Files/CMake/share/cmake-4.2/Modules/CMakeRCInformation.cmake
+C:/Program Files/CMake/share/cmake-4.2/Modules/CMakeSystemSpecificInformation.cmake
+C:/Program Files/CMake/share/cmake-4.2/Modules/CMakeSystemSpecificInitialize.cmake
+C:/Program Files/CMake/share/cmake-4.2/Modules/Compiler/CMakeCommonCompilerMacros.cmake
+C:/Program Files/CMake/share/cmake-4.2/Modules/Compiler/MSVC-C.cmake
+C:/Program Files/CMake/share/cmake-4.2/Modules/Compiler/MSVC.cmake
+C:/Program Files/CMake/share/cmake-4.2/Modules/ExternalProject/shared_internal_commands.cmake
+C:/Program Files/CMake/share/cmake-4.2/Modules/FeatureSummary.cmake
+C:/Program Files/CMake/share/cmake-4.2/Modules/FetchContent.cmake
+C:/Program Files/CMake/share/cmake-4.2/Modules/FetchContent/CMakeLists.cmake.in
+C:/Program Files/CMake/share/cmake-4.2/Modules/FindPackageHandleStandardArgs.cmake
+C:/Program Files/CMake/share/cmake-4.2/Modules/FindPackageMessage.cmake
+C:/Program Files/CMake/share/cmake-4.2/Modules/FindVulkan.cmake
+C:/Program Files/CMake/share/cmake-4.2/Modules/Internal/CMakeCLinkerInformation.cmake
+C:/Program Files/CMake/share/cmake-4.2/Modules/Internal/CMakeCommonLinkerInformation.cmake
+C:/Program Files/CMake/share/cmake-4.2/Modules/Linker/MSVC-C.cmake
+C:/Program Files/CMake/share/cmake-4.2/Modules/Linker/MSVC.cmake
+C:/Program Files/CMake/share/cmake-4.2/Modules/Platform/Linker/Windows-MSVC-C.cmake
+C:/Program Files/CMake/share/cmake-4.2/Modules/Platform/Linker/Windows-MSVC.cmake
+C:/Program Files/CMake/share/cmake-4.2/Modules/Platform/Windows-Initialize.cmake
+C:/Program Files/CMake/share/cmake-4.2/Modules/Platform/Windows-MSVC-C.cmake
+C:/Program Files/CMake/share/cmake-4.2/Modules/Platform/Windows-MSVC.cmake
+C:/Program Files/CMake/share/cmake-4.2/Modules/Platform/Windows.cmake
+C:/Program Files/CMake/share/cmake-4.2/Modules/Platform/WindowsPaths.cmake
+C:/Users/Admin/Desktop/QtPie/CMakeLists.txt
+C:/Users/Admin/Desktop/QtPie/SDL3-devel-3.4.0-VC/SDL3-3.4.0/cmake/SDL3Config.cmake
+C:/Users/Admin/Desktop/QtPie/SDL3-devel-3.4.0-VC/SDL3-3.4.0/cmake/SDL3ConfigVersion.cmake
+C:/Users/Admin/Desktop/QtPie/SDL3-devel-3.4.0-VC/SDL3-3.4.0/cmake/sdlcpu.cmake
+C:/Users/Admin/Desktop/QtPie/build/CMakeFiles/4.2.3/CMakeCCompiler.cmake
+C:/Users/Admin/Desktop/QtPie/build/CMakeFiles/4.2.3/CMakeRCCompiler.cmake
+C:/Users/Admin/Desktop/QtPie/build/CMakeFiles/4.2.3/CMakeSystem.cmake

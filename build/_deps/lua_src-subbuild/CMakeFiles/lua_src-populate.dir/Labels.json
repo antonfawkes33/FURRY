@@ -1,0 +1,46 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "C:/Users/Admin/Desktop/QtPie/build/_deps/lua_src-subbuild/CMakeFiles/lua_src-populate"
+		},
+		{
+			"file" : "C:/Users/Admin/Desktop/QtPie/build/_deps/lua_src-subbuild/CMakeFiles/a885e3d7c73bb92ed3687840743b14ea/lua_src-populate.rule"
+		},
+		{
+			"file" : "C:/Users/Admin/Desktop/QtPie/build/_deps/lua_src-subbuild/CMakeFiles/ee6eb29e565619ee59f020fdce44d010/lua_src-populate-complete.rule"
+		},
+		{
+			"file" : "C:/Users/Admin/Desktop/QtPie/build/_deps/lua_src-subbuild/CMakeFiles/1aac92de3be9c7422bc1e5851e165330/lua_src-populate-build.rule"
+		},
+		{
+			"file" : "C:/Users/Admin/Desktop/QtPie/build/_deps/lua_src-subbuild/CMakeFiles/1aac92de3be9c7422bc1e5851e165330/lua_src-populate-configure.rule"
+		},
+		{
+			"file" : "C:/Users/Admin/Desktop/QtPie/build/_deps/lua_src-subbuild/CMakeFiles/1aac92de3be9c7422bc1e5851e165330/lua_src-populate-download.rule"
+		},
+		{
+			"file" : "C:/Users/Admin/Desktop/QtPie/build/_deps/lua_src-subbuild/CMakeFiles/1aac92de3be9c7422bc1e5851e165330/lua_src-populate-install.rule"
+		},
+		{
+			"file" : "C:/Users/Admin/Desktop/QtPie/build/_deps/lua_src-subbuild/CMakeFiles/1aac92de3be9c7422bc1e5851e165330/lua_src-populate-mkdir.rule"
+		},
+		{
+			"file" : "C:/Users/Admin/Desktop/QtPie/build/_deps/lua_src-subbuild/CMakeFiles/1aac92de3be9c7422bc1e5851e165330/lua_src-populate-patch.rule"
+		},
+		{
+			"file" : "C:/Users/Admin/Desktop/QtPie/build/_deps/lua_src-subbuild/CMakeFiles/1aac92de3be9c7422bc1e5851e165330/lua_src-populate-test.rule"
+		},
+		{
+			"file" : "C:/Users/Admin/Desktop/QtPie/build/_deps/lua_src-subbuild/CMakeFiles/1aac92de3be9c7422bc1e5851e165330/lua_src-populate-update.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"lua_src-populate"
+		],
+		"name" : "lua_src-populate"
+	}
+}
