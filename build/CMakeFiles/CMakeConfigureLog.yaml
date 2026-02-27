@@ -8,6 +8,17 @@ events:
       - "CMakeLists.txt:2 (project)"
     message: |
       The system is: Windows - 10.0.26100 - AMD64
+...
+
+---
+events:
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.2/Modules/CMakeDetermineSystem.cmake:212 (message)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      The system is: Windows - 10.0.26100 - AMD64
   -
     kind: "find-v1"
     backtrace:
@@ -35,6 +46,7 @@ events:
     found: "C:/Program Files/CMake/share/cmake-4.2/Modules/CMakeCCompilerId.c.in"
     search_context:
       ENV{PATH}:
+        - "C:\\VulkanSDK\\1.4.341.1\\Bin"
         - "C:\\Windows\\system32"
         - "C:\\Windows"
         - "C:\\Windows\\System32\\Wbem"
@@ -48,6 +60,7 @@ events:
         - "C:\\Program Files\\nodejs\\"
         - "C:\\Program Files\\CMake\\bin"
         - "C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\"
+        - "C:\\Program Files\\SDL3\\"
         - "C:\\Users\\Admin\\AppData\\Local\\Programs\\Python\\Python312\\Scripts\\"
         - "C:\\Users\\Admin\\AppData\\Local\\Programs\\Python\\Python312\\"
         - "C:\\Users\\Admin\\AppData\\Local\\Programs\\Python\\Launcher\\"
@@ -72,9 +85,9 @@ events:
       The output was:
       0
       MSBuild version 18.3.0-release-26070-10+3972042b7 for .NET Framework
-      Build started 2/20/2026 5:51:41 PM.
+      Build started 2/25/2026 6:59:29 PM.
       
-      Project "C:\\Users\\Admin\\Desktop\\QtPie\\build\\CMakeFiles\\4.2.3\\CompilerIdC\\CompilerIdC.vcxproj" on node 1 (default targets).
+      Project "C:\\Users\\Admin\\Desktop\\FURRY\\build\\CMakeFiles\\4.2.3\\CompilerIdC\\CompilerIdC.vcxproj" on node 1 (default targets).
       PrepareForBuild:
         Creating directory "Debug\\".
         Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
@@ -87,7 +100,7 @@ events:
         CMakeCCompilerId.c
       Link:
         C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.50.35717\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:".\\CompilerIdC.exe" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /PDB:".\\CompilerIdC.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:".\\CompilerIdC.lib" /MACHINE:X64 Debug\\CMakeCCompilerId.obj
-        CompilerIdC.vcxproj -> C:\\Users\\Admin\\Desktop\\QtPie\\build\\CMakeFiles\\4.2.3\\CompilerIdC\\CompilerIdC.exe
+        CompilerIdC.vcxproj -> C:\\Users\\Admin\\Desktop\\FURRY\\build\\CMakeFiles\\4.2.3\\CompilerIdC\\CompilerIdC.exe
       PostBuildEvent:
         for %%i in (cl.exe) do @echo CMAKE_C_COMPILER=%%~$PATH:i
         :VCEnd
@@ -95,13 +108,13 @@ events:
       FinalizeBuildStatus:
         Deleting file "Debug\\CompilerIdC.tlog\\unsuccessfulbuild".
         Touching "Debug\\CompilerIdC.tlog\\CompilerIdC.lastbuildstate".
-      Done Building Project "C:\\Users\\Admin\\Desktop\\QtPie\\build\\CMakeFiles\\4.2.3\\CompilerIdC\\CompilerIdC.vcxproj" (default targets).
+      Done Building Project "C:\\Users\\Admin\\Desktop\\FURRY\\build\\CMakeFiles\\4.2.3\\CompilerIdC\\CompilerIdC.vcxproj" (default targets).
       
       Build succeeded.
           0 Warning(s)
           0 Error(s)
       
-      Time Elapsed 00:00:00.94
+      Time Elapsed 00:00:00.98
       
       
       Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CompilerIdC.exe"
@@ -109,7 +122,7 @@ events:
       Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CompilerIdC.vcxproj"
       
       The C compiler identification is MSVC, found in:
-        C:/Users/Admin/Desktop/QtPie/build/CMakeFiles/4.2.3/CompilerIdC/CompilerIdC.exe
+        C:/Users/Admin/Desktop/FURRY/build/CMakeFiles/4.2.3/CompilerIdC/CompilerIdC.exe
       
   -
     kind: "find-v1"
@@ -134,6 +147,7 @@ events:
       - "link"
     candidate_directories:
       - "C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.50.35717/bin/Hostx64/x64/"
+      - "C:/VulkanSDK/1.4.341.1/Bin/"
       - "C:/Windows/System32/"
       - "C:/Windows/"
       - "C:/Windows/System32/wbem/"
@@ -147,6 +161,7 @@ events:
       - "C:/Program Files/nodejs/"
       - "C:/Program Files/CMake/bin/"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/"
+      - "C:/Program Files/SDL3/"
       - "C:/Users/Admin/AppData/Local/Programs/Python/Python312/Scripts/"
       - "C:/Users/Admin/AppData/Local/Programs/Python/Python312/"
       - "C:/Users/Admin/AppData/Local/Programs/Python/Launcher/"
@@ -160,6 +175,7 @@ events:
     found: "C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.50.35717/bin/Hostx64/x64/link.exe"
     search_context:
       ENV{PATH}:
+        - "C:\\VulkanSDK\\1.4.341.1\\Bin"
         - "C:\\Windows\\system32"
         - "C:\\Windows"
         - "C:\\Windows\\System32\\Wbem"
@@ -173,6 +189,7 @@ events:
         - "C:\\Program Files\\nodejs\\"
         - "C:\\Program Files\\CMake\\bin"
         - "C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\"
+        - "C:\\Program Files\\SDL3\\"
         - "C:\\Users\\Admin\\AppData\\Local\\Programs\\Python\\Python312\\Scripts\\"
         - "C:\\Users\\Admin\\AppData\\Local\\Programs\\Python\\Python312\\"
         - "C:\\Users\\Admin\\AppData\\Local\\Programs\\Python\\Launcher\\"
@@ -204,6 +221,7 @@ events:
       - "lld-link"
     candidate_directories:
       - "C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.50.35717/bin/Hostx64/x64/"
+      - "C:/VulkanSDK/1.4.341.1/Bin/"
       - "C:/Windows/System32/"
       - "C:/Windows/"
       - "C:/Windows/System32/wbem/"
@@ -217,6 +235,7 @@ events:
       - "C:/Program Files/nodejs/"
       - "C:/Program Files/CMake/bin/"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/"
+      - "C:/Program Files/SDL3/"
       - "C:/Users/Admin/AppData/Local/Programs/Python/Python312/Scripts/"
       - "C:/Users/Admin/AppData/Local/Programs/Python/Python312/"
       - "C:/Users/Admin/AppData/Local/Programs/Python/Launcher/"
@@ -229,6 +248,9 @@ events:
       - "C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.50.35717/bin/Hostx64/x64/lld-link.com"
       - "C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.50.35717/bin/Hostx64/x64/lld-link.exe"
       - "C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.50.35717/bin/Hostx64/x64/lld-link"
+      - "C:/VulkanSDK/1.4.341.1/Bin/lld-link.com"
+      - "C:/VulkanSDK/1.4.341.1/Bin/lld-link.exe"
+      - "C:/VulkanSDK/1.4.341.1/Bin/lld-link"
       - "C:/Windows/System32/lld-link.com"
       - "C:/Windows/System32/lld-link.exe"
       - "C:/Windows/System32/lld-link"
@@ -268,6 +290,9 @@ events:
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/lld-link.com"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/lld-link.exe"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/lld-link"
+      - "C:/Program Files/SDL3/lld-link.com"
+      - "C:/Program Files/SDL3/lld-link.exe"
+      - "C:/Program Files/SDL3/lld-link"
       - "C:/Users/Admin/AppData/Local/Programs/Python/Python312/Scripts/lld-link.com"
       - "C:/Users/Admin/AppData/Local/Programs/Python/Python312/Scripts/lld-link.exe"
       - "C:/Users/Admin/AppData/Local/Programs/Python/Python312/Scripts/lld-link"
@@ -295,6 +320,7 @@ events:
     found: false
     search_context:
       ENV{PATH}:
+        - "C:\\VulkanSDK\\1.4.341.1\\Bin"
         - "C:\\Windows\\system32"
         - "C:\\Windows"
         - "C:\\Windows\\System32\\Wbem"
@@ -308,6 +334,7 @@ events:
         - "C:\\Program Files\\nodejs\\"
         - "C:\\Program Files\\CMake\\bin"
         - "C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\"
+        - "C:\\Program Files\\SDL3\\"
         - "C:\\Users\\Admin\\AppData\\Local\\Programs\\Python\\Python312\\Scripts\\"
         - "C:\\Users\\Admin\\AppData\\Local\\Programs\\Python\\Python312\\"
         - "C:\\Users\\Admin\\AppData\\Local\\Programs\\Python\\Launcher\\"
@@ -337,6 +364,7 @@ events:
       - "link"
     candidate_directories:
       - "C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.50.35717/bin/Hostx64/x64/"
+      - "C:/VulkanSDK/1.4.341.1/Bin/"
       - "C:/Windows/System32/"
       - "C:/Windows/"
       - "C:/Windows/System32/wbem/"
@@ -350,6 +378,7 @@ events:
       - "C:/Program Files/nodejs/"
       - "C:/Program Files/CMake/bin/"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/"
+      - "C:/Program Files/SDL3/"
       - "C:/Users/Admin/AppData/Local/Programs/Python/Python312/Scripts/"
       - "C:/Users/Admin/AppData/Local/Programs/Python/Python312/"
       - "C:/Users/Admin/AppData/Local/Programs/Python/Launcher/"
@@ -363,6 +392,7 @@ events:
     found: "C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.50.35717/bin/Hostx64/x64/link.exe"
     search_context:
       ENV{PATH}:
+        - "C:\\VulkanSDK\\1.4.341.1\\Bin"
         - "C:\\Windows\\system32"
         - "C:\\Windows"
         - "C:\\Windows\\System32\\Wbem"
@@ -376,6 +406,7 @@ events:
         - "C:\\Program Files\\nodejs\\"
         - "C:\\Program Files\\CMake\\bin"
         - "C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\"
+        - "C:\\Program Files\\SDL3\\"
         - "C:\\Users\\Admin\\AppData\\Local\\Programs\\Python\\Python312\\Scripts\\"
         - "C:\\Users\\Admin\\AppData\\Local\\Programs\\Python\\Python312\\"
         - "C:\\Users\\Admin\\AppData\\Local\\Programs\\Python\\Launcher\\"
@@ -405,6 +436,7 @@ events:
       - "mt"
     candidate_directories:
       - "C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.50.35717/bin/Hostx64/x64/"
+      - "C:/VulkanSDK/1.4.341.1/Bin/"
       - "C:/Windows/System32/"
       - "C:/Windows/"
       - "C:/Windows/System32/wbem/"
@@ -418,6 +450,7 @@ events:
       - "C:/Program Files/nodejs/"
       - "C:/Program Files/CMake/bin/"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/"
+      - "C:/Program Files/SDL3/"
       - "C:/Users/Admin/AppData/Local/Programs/Python/Python312/Scripts/"
       - "C:/Users/Admin/AppData/Local/Programs/Python/Python312/"
       - "C:/Users/Admin/AppData/Local/Programs/Python/Launcher/"
@@ -430,6 +463,9 @@ events:
       - "C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.50.35717/bin/Hostx64/x64/mt.com"
       - "C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.50.35717/bin/Hostx64/x64/mt.exe"
       - "C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.50.35717/bin/Hostx64/x64/mt"
+      - "C:/VulkanSDK/1.4.341.1/Bin/mt.com"
+      - "C:/VulkanSDK/1.4.341.1/Bin/mt.exe"
+      - "C:/VulkanSDK/1.4.341.1/Bin/mt"
       - "C:/Windows/System32/mt.com"
       - "C:/Windows/System32/mt.exe"
       - "C:/Windows/System32/mt"
@@ -469,6 +505,9 @@ events:
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/mt.com"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/mt.exe"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/mt"
+      - "C:/Program Files/SDL3/mt.com"
+      - "C:/Program Files/SDL3/mt.exe"
+      - "C:/Program Files/SDL3/mt"
       - "C:/Users/Admin/AppData/Local/Programs/Python/Python312/Scripts/mt.com"
       - "C:/Users/Admin/AppData/Local/Programs/Python/Python312/Scripts/mt.exe"
       - "C:/Users/Admin/AppData/Local/Programs/Python/Python312/Scripts/mt"
@@ -496,6 +535,7 @@ events:
     found: false
     search_context:
       ENV{PATH}:
+        - "C:\\VulkanSDK\\1.4.341.1\\Bin"
         - "C:\\Windows\\system32"
         - "C:\\Windows"
         - "C:\\Windows\\System32\\Wbem"
@@ -509,6 +549,7 @@ events:
         - "C:\\Program Files\\nodejs\\"
         - "C:\\Program Files\\CMake\\bin"
         - "C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\"
+        - "C:\\Program Files\\SDL3\\"
         - "C:\\Users\\Admin\\AppData\\Local\\Programs\\Python\\Python312\\Scripts\\"
         - "C:\\Users\\Admin\\AppData\\Local\\Programs\\Python\\Python312\\"
         - "C:\\Users\\Admin\\AppData\\Local\\Programs\\Python\\Launcher\\"
@@ -538,6 +579,7 @@ events:
       - "lib"
     candidate_directories:
       - "C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.50.35717/bin/Hostx64/x64/"
+      - "C:/VulkanSDK/1.4.341.1/Bin/"
       - "C:/Windows/System32/"
       - "C:/Windows/"
       - "C:/Windows/System32/wbem/"
@@ -551,6 +593,7 @@ events:
       - "C:/Program Files/nodejs/"
       - "C:/Program Files/CMake/bin/"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/"
+      - "C:/Program Files/SDL3/"
       - "C:/Users/Admin/AppData/Local/Programs/Python/Python312/Scripts/"
       - "C:/Users/Admin/AppData/Local/Programs/Python/Python312/"
       - "C:/Users/Admin/AppData/Local/Programs/Python/Launcher/"
@@ -564,6 +607,7 @@ events:
     found: "C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.50.35717/bin/Hostx64/x64/lib.exe"
     search_context:
       ENV{PATH}:
+        - "C:\\VulkanSDK\\1.4.341.1\\Bin"
         - "C:\\Windows\\system32"
         - "C:\\Windows"
         - "C:\\Windows\\System32\\Wbem"
@@ -577,6 +621,7 @@ events:
         - "C:\\Program Files\\nodejs\\"
         - "C:\\Program Files\\CMake\\bin"
         - "C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\"
+        - "C:\\Program Files\\SDL3\\"
         - "C:\\Users\\Admin\\AppData\\Local\\Programs\\Python\\Python312\\Scripts\\"
         - "C:\\Users\\Admin\\AppData\\Local\\Programs\\Python\\Python312\\"
         - "C:\\Users\\Admin\\AppData\\Local\\Programs\\Python\\Launcher\\"
@@ -608,6 +653,7 @@ events:
     names:
       - "rc"
     candidate_directories:
+      - "C:/VulkanSDK/1.4.341.1/Bin/"
       - "C:/Windows/System32/"
       - "C:/Windows/"
       - "C:/Windows/System32/wbem/"
@@ -621,6 +667,7 @@ events:
       - "C:/Program Files/nodejs/"
       - "C:/Program Files/CMake/bin/"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/"
+      - "C:/Program Files/SDL3/"
       - "C:/Users/Admin/AppData/Local/Programs/Python/Python312/Scripts/"
       - "C:/Users/Admin/AppData/Local/Programs/Python/Python312/"
       - "C:/Users/Admin/AppData/Local/Programs/Python/Launcher/"
@@ -642,6 +689,9 @@ events:
       - "C:/Program Files (x86)/FURRY/sbin/"
       - "C:/Program Files (x86)/FURRY/"
     searched_directories:
+      - "C:/VulkanSDK/1.4.341.1/Bin/rc.com"
+      - "C:/VulkanSDK/1.4.341.1/Bin/rc.exe"
+      - "C:/VulkanSDK/1.4.341.1/Bin/rc"
       - "C:/Windows/System32/rc.com"
       - "C:/Windows/System32/rc.exe"
       - "C:/Windows/System32/rc"
@@ -681,6 +731,9 @@ events:
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/rc.com"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/rc.exe"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/rc"
+      - "C:/Program Files/SDL3/rc.com"
+      - "C:/Program Files/SDL3/rc.exe"
+      - "C:/Program Files/SDL3/rc"
       - "C:/Users/Admin/AppData/Local/Programs/Python/Python312/Scripts/rc.com"
       - "C:/Users/Admin/AppData/Local/Programs/Python/Python312/Scripts/rc.exe"
       - "C:/Users/Admin/AppData/Local/Programs/Python/Python312/Scripts/rc"
@@ -744,6 +797,7 @@ events:
     found: false
     search_context:
       ENV{PATH}:
+        - "C:\\VulkanSDK\\1.4.341.1\\Bin"
         - "C:\\Windows\\system32"
         - "C:\\Windows"
         - "C:\\Windows\\System32\\Wbem"
@@ -757,6 +811,7 @@ events:
         - "C:\\Program Files\\nodejs\\"
         - "C:\\Program Files\\CMake\\bin"
         - "C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\"
+        - "C:\\Program Files\\SDL3\\"
         - "C:\\Users\\Admin\\AppData\\Local\\Programs\\Python\\Python312\\Scripts\\"
         - "C:\\Users\\Admin\\AppData\\Local\\Programs\\Python\\Python312\\"
         - "C:\\Users\\Admin\\AppData\\Local\\Programs\\Python\\Launcher\\"
@@ -780,8 +835,8 @@ events:
     checks:
       - "Detecting C compiler ABI info"
     directories:
-      source: "C:/Users/Admin/Desktop/QtPie/build/CMakeFiles/CMakeScratch/TryCompile-lb07k6"
-      binary: "C:/Users/Admin/Desktop/QtPie/build/CMakeFiles/CMakeScratch/TryCompile-lb07k6"
+      source: "C:/Users/Admin/Desktop/FURRY/build/CMakeFiles/CMakeScratch/TryCompile-pt60rw"
+      binary: "C:/Users/Admin/Desktop/FURRY/build/CMakeFiles/CMakeScratch/TryCompile-pt60rw"
     cmakeVariables:
       CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
       CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
@@ -790,39 +845,39 @@ events:
       variable: "CMAKE_C_ABI_COMPILED"
       cached: true
       stdout: |
-        Change Dir: 'C:/Users/Admin/Desktop/QtPie/build/CMakeFiles/CMakeScratch/TryCompile-lb07k6'
+        Change Dir: 'C:/Users/Admin/Desktop/FURRY/build/CMakeFiles/CMakeScratch/TryCompile-pt60rw'
         
-        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/18/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_a4db2.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=18.0 /v:n
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/18/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_13e34.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=18.0 /v:n
         MSBuild version 18.3.0-release-26070-10+3972042b7 for .NET Framework
-        Build started 2/20/2026 5:51:42 PM.
+        Build started 2/25/2026 6:59:30 PM.
         
-        Project "C:\\Users\\Admin\\Desktop\\QtPie\\build\\CMakeFiles\\CMakeScratch\\TryCompile-lb07k6\\cmTC_a4db2.vcxproj" on node 1 (default targets).
+        Project "C:\\Users\\Admin\\Desktop\\FURRY\\build\\CMakeFiles\\CMakeScratch\\TryCompile-pt60rw\\cmTC_13e34.vcxproj" on node 1 (default targets).
         PrepareForBuild:
           Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
-          Creating directory "C:\\Users\\Admin\\Desktop\\QtPie\\build\\CMakeFiles\\CMakeScratch\\TryCompile-lb07k6\\Debug\\".
-          Creating directory "cmTC_a4db2.dir\\Debug\\cmTC_a4db2.tlog\\".
+          Creating directory "C:\\Users\\Admin\\Desktop\\FURRY\\build\\CMakeFiles\\CMakeScratch\\TryCompile-pt60rw\\Debug\\".
+          Creating directory "cmTC_13e34.dir\\Debug\\cmTC_13e34.tlog\\".
         InitializeBuildStatus:
-          Creating "cmTC_a4db2.dir\\Debug\\cmTC_a4db2.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
-          Touching "cmTC_a4db2.dir\\Debug\\cmTC_a4db2.tlog\\unsuccessfulbuild".
+          Creating "cmTC_13e34.dir\\Debug\\cmTC_13e34.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_13e34.dir\\Debug\\cmTC_13e34.tlog\\unsuccessfulbuild".
         ClCompile:
-          C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.50.35717\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_a4db2.dir\\Debug\\\\" /Fd"cmTC_a4db2.dir\\Debug\\vc145.pdb" /external:W1 /TC /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-4.2\\Modules\\CMakeCCompilerABI.c"
+          C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.50.35717\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_13e34.dir\\Debug\\\\" /Fd"cmTC_13e34.dir\\Debug\\vc145.pdb" /external:W1 /TC /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-4.2\\Modules\\CMakeCCompilerABI.c"
           Microsoft (R) C/C++ Optimizing Compiler Version 19.50.35724 for x64
           Copyright (C) Microsoft Corporation.  All rights reserved.
-          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_a4db2.dir\\Debug\\\\" /Fd"cmTC_a4db2.dir\\Debug\\vc145.pdb" /external:W1 /TC /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-4.2\\Modules\\CMakeCCompilerABI.c"
+          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_13e34.dir\\Debug\\\\" /Fd"cmTC_13e34.dir\\Debug\\vc145.pdb" /external:W1 /TC /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-4.2\\Modules\\CMakeCCompilerABI.c"
           CMakeCCompilerABI.c
         Link:
-          C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.50.35717\\bin\\HostX64\\x64\\link.exe /OUT:"C:\\Users\\Admin\\Desktop\\QtPie\\build\\CMakeFiles\\CMakeScratch\\TryCompile-lb07k6\\Debug\\cmTC_a4db2.exe" /INCREMENTAL /ILK:"cmTC_a4db2.dir\\Debug\\cmTC_a4db2.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/Admin/Desktop/QtPie/build/CMakeFiles/CMakeScratch/TryCompile-lb07k6/Debug/cmTC_a4db2.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"C:/Users/Admin/Desktop/QtPie/build/CMakeFiles/CMakeScratch/TryCompile-lb07k6/Debug/cmTC_a4db2.lib" /MACHINE:X64  /machine:x64 cmTC_a4db2.dir\\Debug\\CMakeCCompilerABI.obj
-          cmTC_a4db2.vcxproj -> C:\\Users\\Admin\\Desktop\\QtPie\\build\\CMakeFiles\\CMakeScratch\\TryCompile-lb07k6\\Debug\\cmTC_a4db2.exe
+          C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.50.35717\\bin\\HostX64\\x64\\link.exe /OUT:"C:\\Users\\Admin\\Desktop\\FURRY\\build\\CMakeFiles\\CMakeScratch\\TryCompile-pt60rw\\Debug\\cmTC_13e34.exe" /INCREMENTAL /ILK:"cmTC_13e34.dir\\Debug\\cmTC_13e34.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/Admin/Desktop/FURRY/build/CMakeFiles/CMakeScratch/TryCompile-pt60rw/Debug/cmTC_13e34.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"C:/Users/Admin/Desktop/FURRY/build/CMakeFiles/CMakeScratch/TryCompile-pt60rw/Debug/cmTC_13e34.lib" /MACHINE:X64  /machine:x64 cmTC_13e34.dir\\Debug\\CMakeCCompilerABI.obj
+          cmTC_13e34.vcxproj -> C:\\Users\\Admin\\Desktop\\FURRY\\build\\CMakeFiles\\CMakeScratch\\TryCompile-pt60rw\\Debug\\cmTC_13e34.exe
         FinalizeBuildStatus:
-          Deleting file "cmTC_a4db2.dir\\Debug\\cmTC_a4db2.tlog\\unsuccessfulbuild".
-          Touching "cmTC_a4db2.dir\\Debug\\cmTC_a4db2.tlog\\cmTC_a4db2.lastbuildstate".
-        Done Building Project "C:\\Users\\Admin\\Desktop\\QtPie\\build\\CMakeFiles\\CMakeScratch\\TryCompile-lb07k6\\cmTC_a4db2.vcxproj" (default targets).
+          Deleting file "cmTC_13e34.dir\\Debug\\cmTC_13e34.tlog\\unsuccessfulbuild".
+          Touching "cmTC_13e34.dir\\Debug\\cmTC_13e34.tlog\\cmTC_13e34.lastbuildstate".
+        Done Building Project "C:\\Users\\Admin\\Desktop\\FURRY\\build\\CMakeFiles\\CMakeScratch\\TryCompile-pt60rw\\cmTC_13e34.vcxproj" (default targets).
         
         Build succeeded.
             0 Warning(s)
             0 Error(s)
         
-        Time Elapsed 00:00:00.42
+        Time Elapsed 00:00:00.39
         
       exitCode: 0
   -
@@ -853,483 +908,4 @@ events:
       Running the C compiler's linker: "C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.50.35717/bin/HostX64/x64/link.exe" "-v"
       Microsoft (R) Incremental Linker Version 14.50.35724.0
       Copyright (C) Microsoft Corporation.  All rights reserved.
-  -
-    kind: "find-v1"
-    backtrace:
-      - "C:/Program Files/CMake/share/cmake-4.2/Modules/FindVulkan.cmake:392 (find_path)"
-      - "CMakeLists.txt:29 (find_package)"
-    mode: "path"
-    variable: "Vulkan_INCLUDE_DIR"
-    description: "Path to a file."
-    settings:
-      SearchFramework: "NEVER"
-      SearchAppBundle: "NEVER"
-      CMAKE_FIND_USE_CMAKE_PATH: true
-      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
-      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
-      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
-      CMAKE_FIND_USE_INSTALL_PREFIX: true
-    names:
-      - "vulkan/vulkan.h"
-    candidate_directories:
-      - "C:/VulkanSDK/1.4.341.1/include/"
-      - "C:/Windows/System32/"
-      - "C:/Windows/"
-      - "C:/Windows/System32/wbem/"
-      - "C:/Windows/System32/WindowsPowerShell/v1.0/"
-      - "C:/Windows/System32/OpenSSH/"
-      - "C:/Program Files/NVIDIA Corporation/NVIDIA App/NvDLISR/"
-      - "C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common/"
-      - "C:/Program Files/Git/cmd/"
-      - "C:/Program Files/dotnet/"
-      - "C:/Program Files/Tailscale/"
-      - "C:/Program Files/nodejs/"
-      - "C:/Program Files/CMake/bin/"
-      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/"
-      - "C:/Users/Admin/AppData/Local/Programs/Python/Python312/Scripts/"
-      - "C:/Users/Admin/AppData/Local/Programs/Python/Python312/"
-      - "C:/Users/Admin/AppData/Local/Programs/Python/Launcher/"
-      - "C:/Users/Admin/AppData/Local/Microsoft/WindowsApps/"
-      - "C:/Users/Admin/.lmstudio/bin/"
-      - "C:/Users/Admin/AppData/Local/Programs/Antigravity/bin/"
-      - "C:/Users/Admin/AppData/Local/Programs/VSCodium/bin/"
-      - "C:/Users/Admin/AppData/Roaming/npm/"
-      - "C:/Program Files/include/"
-      - "C:/Program Files/"
-      - "C:/Program Files (x86)/include/"
-      - "C:/Program Files (x86)/"
-      - "C:/Program Files/CMake/include/"
-      - "C:/Program Files/CMake/"
-      - "C:/Program Files (x86)/FURRY/include/"
-      - "C:/Program Files (x86)/FURRY/"
-    found: "C:/VulkanSDK/1.4.341.1/include/"
-    search_context:
-      ENV{PATH}:
-        - "C:\\Windows\\system32"
-        - "C:\\Windows"
-        - "C:\\Windows\\System32\\Wbem"
-        - "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\"
-        - "C:\\Windows\\System32\\OpenSSH\\"
-        - "C:\\Program Files\\NVIDIA Corporation\\NVIDIA App\\NvDLISR"
-        - "C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common"
-        - "C:\\Program Files\\Git\\cmd"
-        - "C:\\Program Files\\dotnet\\"
-        - "C:\\Program Files\\Tailscale\\"
-        - "C:\\Program Files\\nodejs\\"
-        - "C:\\Program Files\\CMake\\bin"
-        - "C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\"
-        - "C:\\Users\\Admin\\AppData\\Local\\Programs\\Python\\Python312\\Scripts\\"
-        - "C:\\Users\\Admin\\AppData\\Local\\Programs\\Python\\Python312\\"
-        - "C:\\Users\\Admin\\AppData\\Local\\Programs\\Python\\Launcher\\"
-        - "C:\\Users\\Admin\\AppData\\Local\\Microsoft\\WindowsApps"
-        - "C:\\Users\\Admin\\.lmstudio\\bin"
-        - "C:\\Users\\Admin\\AppData\\Local\\Programs\\Antigravity\\bin"
-        - "C:\\Users\\Admin\\AppData\\Local\\Programs\\VSCodium\\bin"
-        - "C:\\Users\\Admin\\AppData\\Roaming\\npm"
-      CMAKE_INSTALL_PREFIX: "C:/Program Files (x86)/FURRY"
-      CMAKE_SYSTEM_PREFIX_PATH:
-        - "C:/Program Files"
-        - "C:/Program Files (x86)"
-        - "C:/Program Files/CMake"
-        - "C:/Program Files (x86)/FURRY"
-  -
-    kind: "find-v1"
-    backtrace:
-      - "C:/Program Files/CMake/share/cmake-4.2/Modules/FindVulkan.cmake:399 (find_library)"
-      - "CMakeLists.txt:29 (find_package)"
-    mode: "library"
-    variable: "Vulkan_LIBRARY"
-    description: "Path to a library."
-    settings:
-      SearchFramework: "NEVER"
-      SearchAppBundle: "NEVER"
-      CMAKE_FIND_USE_CMAKE_PATH: true
-      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
-      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
-      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
-      CMAKE_FIND_USE_INSTALL_PREFIX: true
-    names:
-      - "vulkan-1"
-    candidate_directories:
-      - "C:/VulkanSDK/1.4.341.1/lib/"
-      - "C:/VulkanSDK/1.4.341.1/bin/"
-      - "C:/Windows/System32/"
-      - "C:/Windows/"
-      - "C:/Windows/System32/wbem/"
-      - "C:/Windows/System32/WindowsPowerShell/v1.0/"
-      - "C:/Windows/System32/OpenSSH/"
-      - "C:/Program Files/NVIDIA Corporation/NVIDIA App/NvDLISR/"
-      - "C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common/"
-      - "C:/Program Files/Git/cmd/"
-      - "C:/Program Files/dotnet/"
-      - "C:/Program Files/Tailscale/"
-      - "C:/Program Files/nodejs/"
-      - "C:/Program Files/CMake/bin/"
-      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/"
-      - "C:/Users/Admin/AppData/Local/Programs/Python/Python312/Scripts/"
-      - "C:/Users/Admin/AppData/Local/Programs/Python/Python312/"
-      - "C:/Users/Admin/AppData/Local/Programs/Python/Launcher/"
-      - "C:/Users/Admin/AppData/Local/Microsoft/WindowsApps/"
-      - "C:/Users/Admin/.lmstudio/bin/"
-      - "C:/Users/Admin/AppData/Local/Programs/Antigravity/bin/"
-      - "C:/Users/Admin/AppData/Local/Programs/VSCodium/bin/"
-      - "C:/Users/Admin/AppData/Roaming/npm/"
-      - "C:/Program Files/lib/"
-      - "C:/Program Files/"
-      - "C:/Program Files (x86)/lib/"
-      - "C:/Program Files (x86)/"
-      - "C:/Program Files/CMake/lib/"
-      - "C:/Program Files/CMake/"
-      - "C:/Program Files (x86)/FURRY/lib/"
-      - "C:/Program Files (x86)/FURRY/"
-      - "C:/Program Files (x86)/FURRY/bin/"
-      - "/bin/"
-    found: "C:/VulkanSDK/1.4.341.1/Lib/vulkan-1.lib"
-    search_context:
-      ENV{PATH}:
-        - "C:\\Windows\\system32"
-        - "C:\\Windows"
-        - "C:\\Windows\\System32\\Wbem"
-        - "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\"
-        - "C:\\Windows\\System32\\OpenSSH\\"
-        - "C:\\Program Files\\NVIDIA Corporation\\NVIDIA App\\NvDLISR"
-        - "C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common"
-        - "C:\\Program Files\\Git\\cmd"
-        - "C:\\Program Files\\dotnet\\"
-        - "C:\\Program Files\\Tailscale\\"
-        - "C:\\Program Files\\nodejs\\"
-        - "C:\\Program Files\\CMake\\bin"
-        - "C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\"
-        - "C:\\Users\\Admin\\AppData\\Local\\Programs\\Python\\Python312\\Scripts\\"
-        - "C:\\Users\\Admin\\AppData\\Local\\Programs\\Python\\Python312\\"
-        - "C:\\Users\\Admin\\AppData\\Local\\Programs\\Python\\Launcher\\"
-        - "C:\\Users\\Admin\\AppData\\Local\\Microsoft\\WindowsApps"
-        - "C:\\Users\\Admin\\.lmstudio\\bin"
-        - "C:\\Users\\Admin\\AppData\\Local\\Programs\\Antigravity\\bin"
-        - "C:\\Users\\Admin\\AppData\\Local\\Programs\\VSCodium\\bin"
-        - "C:\\Users\\Admin\\AppData\\Roaming\\npm"
-      CMAKE_INSTALL_PREFIX: "C:/Program Files (x86)/FURRY"
-      CMAKE_SYSTEM_PREFIX_PATH:
-        - "C:/Program Files"
-        - "C:/Program Files (x86)"
-        - "C:/Program Files/CMake"
-        - "C:/Program Files (x86)/FURRY"
-      CMAKE_SYSTEM_LIBRARY_PATH:
-        - "C:/Program Files (x86)/FURRY/bin"
-        - "C:/Program Files/CMake/bin"
-        - "/bin"
-  -
-    kind: "find-v1"
-    backtrace:
-      - "C:/Program Files/CMake/share/cmake-4.2/Modules/FindVulkan.cmake:407 (find_program)"
-      - "CMakeLists.txt:29 (find_package)"
-    mode: "program"
-    variable: "Vulkan_GLSLC_EXECUTABLE"
-    description: "Path to a program."
-    settings:
-      SearchFramework: "NEVER"
-      SearchAppBundle: "NEVER"
-      CMAKE_FIND_USE_CMAKE_PATH: true
-      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
-      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
-      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
-      CMAKE_FIND_USE_INSTALL_PREFIX: true
-    names:
-      - "glslc"
-    candidate_directories:
-      - "C:/VulkanSDK/1.4.341.1/bin/"
-      - "C:/Windows/System32/"
-      - "C:/Windows/"
-      - "C:/Windows/System32/wbem/"
-      - "C:/Windows/System32/WindowsPowerShell/v1.0/"
-      - "C:/Windows/System32/OpenSSH/"
-      - "C:/Program Files/NVIDIA Corporation/NVIDIA App/NvDLISR/"
-      - "C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common/"
-      - "C:/Program Files/Git/cmd/"
-      - "C:/Program Files/dotnet/"
-      - "C:/Program Files/Tailscale/"
-      - "C:/Program Files/nodejs/"
-      - "C:/Program Files/CMake/bin/"
-      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/"
-      - "C:/Users/Admin/AppData/Local/Programs/Python/Python312/Scripts/"
-      - "C:/Users/Admin/AppData/Local/Programs/Python/Python312/"
-      - "C:/Users/Admin/AppData/Local/Programs/Python/Launcher/"
-      - "C:/Users/Admin/AppData/Local/Microsoft/WindowsApps/"
-      - "C:/Users/Admin/.lmstudio/bin/"
-      - "C:/Users/Admin/AppData/Local/Programs/Antigravity/bin/"
-      - "C:/Users/Admin/AppData/Local/Programs/VSCodium/bin/"
-      - "C:/Users/Admin/AppData/Roaming/npm/"
-      - "C:/Program Files/bin/"
-      - "C:/Program Files/sbin/"
-      - "C:/Program Files/"
-      - "C:/Program Files (x86)/bin/"
-      - "C:/Program Files (x86)/sbin/"
-      - "C:/Program Files (x86)/"
-      - "C:/Program Files/CMake/bin/"
-      - "C:/Program Files/CMake/sbin/"
-      - "C:/Program Files/CMake/"
-      - "C:/Program Files (x86)/FURRY/bin/"
-      - "C:/Program Files (x86)/FURRY/sbin/"
-      - "C:/Program Files (x86)/FURRY/"
-    searched_directories:
-      - "C:/VulkanSDK/1.4.341.1/bin/glslc.com"
-    found: "C:/VulkanSDK/1.4.341.1/Bin/glslc.exe"
-    search_context:
-      ENV{PATH}:
-        - "C:\\Windows\\system32"
-        - "C:\\Windows"
-        - "C:\\Windows\\System32\\Wbem"
-        - "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\"
-        - "C:\\Windows\\System32\\OpenSSH\\"
-        - "C:\\Program Files\\NVIDIA Corporation\\NVIDIA App\\NvDLISR"
-        - "C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common"
-        - "C:\\Program Files\\Git\\cmd"
-        - "C:\\Program Files\\dotnet\\"
-        - "C:\\Program Files\\Tailscale\\"
-        - "C:\\Program Files\\nodejs\\"
-        - "C:\\Program Files\\CMake\\bin"
-        - "C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\"
-        - "C:\\Users\\Admin\\AppData\\Local\\Programs\\Python\\Python312\\Scripts\\"
-        - "C:\\Users\\Admin\\AppData\\Local\\Programs\\Python\\Python312\\"
-        - "C:\\Users\\Admin\\AppData\\Local\\Programs\\Python\\Launcher\\"
-        - "C:\\Users\\Admin\\AppData\\Local\\Microsoft\\WindowsApps"
-        - "C:\\Users\\Admin\\.lmstudio\\bin"
-        - "C:\\Users\\Admin\\AppData\\Local\\Programs\\Antigravity\\bin"
-        - "C:\\Users\\Admin\\AppData\\Local\\Programs\\VSCodium\\bin"
-        - "C:\\Users\\Admin\\AppData\\Roaming\\npm"
-      CMAKE_INSTALL_PREFIX: "C:/Program Files (x86)/FURRY"
-      CMAKE_SYSTEM_PREFIX_PATH:
-        - "C:/Program Files"
-        - "C:/Program Files (x86)"
-        - "C:/Program Files/CMake"
-        - "C:/Program Files (x86)/FURRY"
-  -
-    kind: "find-v1"
-    backtrace:
-      - "C:/Program Files/CMake/share/cmake-4.2/Modules/FindVulkan.cmake:415 (find_program)"
-      - "CMakeLists.txt:29 (find_package)"
-    mode: "program"
-    variable: "Vulkan_GLSLANG_VALIDATOR_EXECUTABLE"
-    description: "Path to a program."
-    settings:
-      SearchFramework: "NEVER"
-      SearchAppBundle: "NEVER"
-      CMAKE_FIND_USE_CMAKE_PATH: true
-      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
-      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
-      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
-      CMAKE_FIND_USE_INSTALL_PREFIX: true
-    names:
-      - "glslangValidator"
-    candidate_directories:
-      - "C:/VulkanSDK/1.4.341.1/bin/"
-      - "C:/Windows/System32/"
-      - "C:/Windows/"
-      - "C:/Windows/System32/wbem/"
-      - "C:/Windows/System32/WindowsPowerShell/v1.0/"
-      - "C:/Windows/System32/OpenSSH/"
-      - "C:/Program Files/NVIDIA Corporation/NVIDIA App/NvDLISR/"
-      - "C:/Program Files (x86)/NVIDIA Corporation/PhysX/Common/"
-      - "C:/Program Files/Git/cmd/"
-      - "C:/Program Files/dotnet/"
-      - "C:/Program Files/Tailscale/"
-      - "C:/Program Files/nodejs/"
-      - "C:/Program Files/CMake/bin/"
-      - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/"
-      - "C:/Users/Admin/AppData/Local/Programs/Python/Python312/Scripts/"
-      - "C:/Users/Admin/AppData/Local/Programs/Python/Python312/"
-      - "C:/Users/Admin/AppData/Local/Programs/Python/Launcher/"
-      - "C:/Users/Admin/AppData/Local/Microsoft/WindowsApps/"
-      - "C:/Users/Admin/.lmstudio/bin/"
-      - "C:/Users/Admin/AppData/Local/Programs/Antigravity/bin/"
-      - "C:/Users/Admin/AppData/Local/Programs/VSCodium/bin/"
-      - "C:/Users/Admin/AppData/Roaming/npm/"
-      - "C:/Program Files/bin/"
-      - "C:/Program Files/sbin/"
-      - "C:/Program Files/"
-      - "C:/Program Files (x86)/bin/"
-      - "C:/Program Files (x86)/sbin/"
-      - "C:/Program Files (x86)/"
-      - "C:/Program Files/CMake/bin/"
-      - "C:/Program Files/CMake/sbin/"
-      - "C:/Program Files/CMake/"
-      - "C:/Program Files (x86)/FURRY/bin/"
-      - "C:/Program Files (x86)/FURRY/sbin/"
-      - "C:/Program Files (x86)/FURRY/"
-    searched_directories:
-      - "C:/VulkanSDK/1.4.341.1/bin/glslangValidator.com"
-    found: "C:/VulkanSDK/1.4.341.1/Bin/glslangValidator.exe"
-    search_context:
-      ENV{PATH}:
-        - "C:\\Windows\\system32"
-        - "C:\\Windows"
-        - "C:\\Windows\\System32\\Wbem"
-        - "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\"
-        - "C:\\Windows\\System32\\OpenSSH\\"
-        - "C:\\Program Files\\NVIDIA Corporation\\NVIDIA App\\NvDLISR"
-        - "C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common"
-        - "C:\\Program Files\\Git\\cmd"
-        - "C:\\Program Files\\dotnet\\"
-        - "C:\\Program Files\\Tailscale\\"
-        - "C:\\Program Files\\nodejs\\"
-        - "C:\\Program Files\\CMake\\bin"
-        - "C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\"
-        - "C:\\Users\\Admin\\AppData\\Local\\Programs\\Python\\Python312\\Scripts\\"
-        - "C:\\Users\\Admin\\AppData\\Local\\Programs\\Python\\Python312\\"
-        - "C:\\Users\\Admin\\AppData\\Local\\Programs\\Python\\Launcher\\"
-        - "C:\\Users\\Admin\\AppData\\Local\\Microsoft\\WindowsApps"
-        - "C:\\Users\\Admin\\.lmstudio\\bin"
-        - "C:\\Users\\Admin\\AppData\\Local\\Programs\\Antigravity\\bin"
-        - "C:\\Users\\Admin\\AppData\\Local\\Programs\\VSCodium\\bin"
-        - "C:\\Users\\Admin\\AppData\\Roaming\\npm"
-      CMAKE_INSTALL_PREFIX: "C:/Program Files (x86)/FURRY"
-      CMAKE_SYSTEM_PREFIX_PATH:
-        - "C:/Program Files"
-        - "C:/Program Files (x86)"
-        - "C:/Program Files/CMake"
-        - "C:/Program Files (x86)/FURRY"
-  -
-    kind: "try_compile-v1"
-    backtrace:
-      - "SDL3-devel-3.4.0-VC/SDL3-3.4.0/cmake/sdlcpu.cmake:95 (try_compile)"
-      - "SDL3-devel-3.4.0-VC/SDL3-3.4.0/cmake/SDL3ConfigVersion.cmake:32 (SDL_DetectTargetCPUArchitectures)"
-      - "CMakeLists.txt:30 (find_package)"
-    directories:
-      source: "C:/Users/Admin/Desktop/QtPie/build/CMakeFiles/CMakeTmp/SDL_detect_arch/CMakeFiles/CMakeTmp"
-      binary: "C:/Users/Admin/Desktop/QtPie/build/CMakeFiles/CMakeTmp/SDL_detect_arch/CMakeFiles/CMakeTmp"
-    cmakeVariables:
-      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
-      CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
-      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
-    buildResult:
-      variable: "SDL_CPU_CHECK_ALL"
-      cached: true
-      stdout: |
-        Change Dir: 'C:/Users/Admin/Desktop/QtPie/build/CMakeFiles/CMakeTmp/SDL_detect_arch/CMakeFiles/CMakeTmp'
-        
-        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/18/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_60545.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=18.0 /v:n
-        MSBuild version 18.3.0-release-26070-10+3972042b7 for .NET Framework
-        Build started 2/20/2026 5:51:43 PM.
-        
-        Project "C:\\Users\\Admin\\Desktop\\QtPie\\build\\CMakeFiles\\CMakeTmp\\SDL_detect_arch\\CMakeFiles\\CMakeTmp\\cmTC_60545.vcxproj" on node 1 (default targets).
-        PrepareForBuild:
-          Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
-          Creating directory "C:\\Users\\Admin\\Desktop\\QtPie\\build\\CMakeFiles\\CMakeTmp\\SDL_detect_arch\\CMakeFiles\\CMakeTmp\\Debug\\".
-          Creating directory "cmTC_60545.dir\\Debug\\cmTC_60545.tlog\\".
-        InitializeBuildStatus:
-          Creating "cmTC_60545.dir\\Debug\\cmTC_60545.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
-          Touching "cmTC_60545.dir\\Debug\\cmTC_60545.tlog\\unsuccessfulbuild".
-        ClCompile:
-          C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.50.35717\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /std:c11 /Fo"cmTC_60545.dir\\Debug\\\\" /Fd"C:\\Users\\Admin\\Desktop\\QtPie\\build\\CMakeFiles\\CMakeTmp\\SDL_detect_arch\\CMakeFiles\\CMakeTmp\\Debug\\cmTC_60545.pdb" /external:W1 /TC /errorReport:queue C:\\Users\\Admin\\Desktop\\QtPie\\build\\CMakeFiles\\CMakeTmp\\SDL_detect_arch.c
-          Microsoft (R) C/C++ Optimizing Compiler Version 19.50.35724 for x64
-          Copyright (C) Microsoft Corporation.  All rights reserved.
-          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /std:c11 /Fo"cmTC_60545.dir\\Debug\\\\" /Fd"C:\\Users\\Admin\\Desktop\\QtPie\\build\\CMakeFiles\\CMakeTmp\\SDL_detect_arch\\CMakeFiles\\CMakeTmp\\Debug\\cmTC_60545.pdb" /external:W1 /TC /errorReport:queue C:\\Users\\Admin\\Desktop\\QtPie\\build\\CMakeFiles\\CMakeTmp\\SDL_detect_arch.c
-          SDL_detect_arch.c
-        Lib:
-          C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.50.35717\\bin\\HostX64\\x64\\Lib.exe /OUT:"C:\\Users\\Admin\\Desktop\\QtPie\\build\\CMakeFiles\\CMakeTmp\\SDL_detect_arch\\CMakeFiles\\CMakeTmp\\Debug\\cmTC_60545.lib" /NOLOGO /MACHINE:X64  /machine:x64 cmTC_60545.dir\\Debug\\SDL_detect_arch.obj
-          cmTC_60545.vcxproj -> C:\\Users\\Admin\\Desktop\\QtPie\\build\\CMakeFiles\\CMakeTmp\\SDL_detect_arch\\CMakeFiles\\CMakeTmp\\Debug\\cmTC_60545.lib
-        FinalizeBuildStatus:
-          Deleting file "cmTC_60545.dir\\Debug\\cmTC_60545.tlog\\unsuccessfulbuild".
-          Touching "cmTC_60545.dir\\Debug\\cmTC_60545.tlog\\cmTC_60545.lastbuildstate".
-        Done Building Project "C:\\Users\\Admin\\Desktop\\QtPie\\build\\CMakeFiles\\CMakeTmp\\SDL_detect_arch\\CMakeFiles\\CMakeTmp\\cmTC_60545.vcxproj" (default targets).
-        
-        Build succeeded.
-            0 Warning(s)
-            0 Error(s)
-        
-        Time Elapsed 00:00:00.33
-        
-      exitCode: 0
-  -
-    kind: "find_package-v1"
-    backtrace:
-      - "CMakeLists.txt:30 (find_package)"
-    name: "SDL3"
-    configs:
-      -
-        filename: "SDL3Config.cmake"
-        kind: "cmake"
-      -
-        filename: "sdl3-config.cmake"
-        kind: "cmake"
-    version_request:
-      exact: false
-    settings:
-      required: "required_explicit"
-      quiet: false
-      global: false
-      policy_scope: true
-      bypass_provider: false
-      names:
-        - "SDL3"
-      path_suffixes:
-        - ""
-      paths:
-        CMAKE_FIND_USE_CMAKE_PATH: true
-        CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
-        CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
-        CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
-        CMAKE_FIND_USE_INSTALL_PREFIX: true
-        CMAKE_FIND_USE_PACKAGE_ROOT_PATH: true
-        CMAKE_FIND_USE_CMAKE_PACKAGE_REGISTRY: true
-        CMAKE_FIND_USE_SYSTEM_PACKAGE_REGISTRY: true
-        CMAKE_FIND_ROOT_PATH_MODE: "BOTH"
-    candidates:
-      -
-        path: "c:/Users/Admin/Desktop/QtPie/SDL3-devel-3.4.0-VC/SDL3-3.4.0/SDL3Config.cmake"
-        mode: "none?"
-        reason: "no_exist"
-      -
-        path: "c:/Users/Admin/Desktop/QtPie/SDL3-devel-3.4.0-VC/SDL3-3.4.0/sdl3-config.cmake"
-        mode: "none?"
-        reason: "no_exist"
-      -
-        path: "C:/Users/Admin/Desktop/QtPie/build/CMakeFiles/pkgRedirects/SDL3Config.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "C:/Users/Admin/Desktop/QtPie/build/CMakeFiles/pkgRedirects/sdl3-config.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "C:/Users/Admin/Desktop/QtPie/SDL3-devel-3.4.0-VC/SDL3-3.4.0/SDL3Config.cmake"
-        mode: "config"
-        reason: "no_exist"
-      -
-        path: "C:/Users/Admin/Desktop/QtPie/SDL3-devel-3.4.0-VC/SDL3-3.4.0/sdl3-config.cmake"
-        mode: "config"
-        reason: "no_exist"
-    found:
-      path: "C:/Users/Admin/Desktop/QtPie/SDL3-devel-3.4.0-VC/SDL3-3.4.0/cmake/SDL3Config.cmake"
-      mode: "config"
-      version: "3.4.0"
-    search_context:
-      ENV{PATH}:
-        - "C:\\Windows\\system32"
-        - "C:\\Windows"
-        - "C:\\Windows\\System32\\Wbem"
-        - "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\"
-        - "C:\\Windows\\System32\\OpenSSH\\"
-        - "C:\\Program Files\\NVIDIA Corporation\\NVIDIA App\\NvDLISR"
-        - "C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common"
-        - "C:\\Program Files\\Git\\cmd"
-        - "C:\\Program Files\\dotnet\\"
-        - "C:\\Program Files\\Tailscale\\"
-        - "C:\\Program Files\\nodejs\\"
-        - "C:\\Program Files\\CMake\\bin"
-        - "C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\"
-        - "C:\\Users\\Admin\\AppData\\Local\\Programs\\Python\\Python312\\Scripts\\"
-        - "C:\\Users\\Admin\\AppData\\Local\\Programs\\Python\\Python312\\"
-        - "C:\\Users\\Admin\\AppData\\Local\\Programs\\Python\\Launcher\\"
-        - "C:\\Users\\Admin\\AppData\\Local\\Microsoft\\WindowsApps"
-        - "C:\\Users\\Admin\\.lmstudio\\bin"
-        - "C:\\Users\\Admin\\AppData\\Local\\Programs\\Antigravity\\bin"
-        - "C:\\Users\\Admin\\AppData\\Local\\Programs\\VSCodium\\bin"
-        - "C:\\Users\\Admin\\AppData\\Roaming\\npm"
-      CMAKE_INSTALL_PREFIX: "C:/Program Files (x86)/FURRY"
-      CMAKE_SYSTEM_PREFIX_PATH:
-        - "C:/Program Files"
-        - "C:/Program Files (x86)"
-        - "C:/Program Files/CMake"
-        - "C:/Program Files (x86)/FURRY"
 ...

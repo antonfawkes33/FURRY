@@ -1,5 +1,6 @@
-C:/Users/Admin/Desktop/QtPie/build/CMakeFiles/lua.dir
-C:/Users/Admin/Desktop/QtPie/build/CMakeFiles/furry.dir
-C:/Users/Admin/Desktop/QtPie/build/CMakeFiles/furry_game.dir
-C:/Users/Admin/Desktop/QtPie/build/CMakeFiles/ALL_BUILD.dir
-C:/Users/Admin/Desktop/QtPie/build/CMakeFiles/ZERO_CHECK.dir
+C:/Users/Admin/Desktop/FURRY/build/CMakeFiles/furry_lib.dir
+C:/Users/Admin/Desktop/FURRY/build/CMakeFiles/furry_app.dir
+C:/Users/Admin/Desktop/FURRY/build/CMakeFiles/test_furry.dir
+C:/Users/Admin/Desktop/FURRY/build/CMakeFiles/RUN_TESTS.dir
+C:/Users/Admin/Desktop/FURRY/build/CMakeFiles/ALL_BUILD.dir
+C:/Users/Admin/Desktop/FURRY/build/CMakeFiles/ZERO_CHECK.dir
