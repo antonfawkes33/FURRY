@@ -3,6 +3,7 @@
 #include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <strings.h>
 #include <string.h>
 
 #define FURRY_OK 0
@@ -11,6 +12,8 @@
 typedef struct RuntimeState {
     FurryRuntimeSnapshot snap;
 } RuntimeState;
+
+static int find_label(const FurryProgram *program, const char *label);
 
 static void trim(char *line) {
     size_t len = strlen(line);
@@ -70,13 +73,99 @@ static int parse_choice_option(const char *token, FurryChoice *out) {
     return FURRY_OK;
 }
 
+static char *split_once(char *text, char delim) {
+    char *pos = strchr(text, delim);
+    if (pos == NULL) {
+        return NULL;
+    }
+    *pos = '\0';
+    return pos + 1;
+}
+
+static int has_supported_media_extension(const char *asset_path) {
+    if (asset_path == NULL) {
+        return 0;
+    }
+    const char *dot = strrchr(asset_path, '.');
+    if (dot == NULL || dot[1] == '\0') {
+        return 0;
+    }
+    const char *ext = dot + 1;
+    return strcasecmp(ext, "png") == 0 || strcasecmp(ext, "jpg") == 0 || strcasecmp(ext, "jpeg") == 0 ||
+           strcasecmp(ext, "webp") == 0 || strcasecmp(ext, "gif") == 0 || strcasecmp(ext, "apng") == 0 ||
+           strcasecmp(ext, "webm") == 0 || strcasecmp(ext, "mp4") == 0 || strcasecmp(ext, "m4v") == 0 ||
+           strcasecmp(ext, "flv") == 0 || strcasecmp(ext, "anim") == 0;
+}
+
 const char *furry_version(void) {
     return "0.4.0";
 }
 
-int furry_compile_script(const char *script, FurryProgram *out_program) {
-    if (script == NULL || out_program == NULL) {
+static int validate_program_references(const FurryProgram *program, FurryCompileError *out_error) {
+    int ui_depth = 0;
+    for (size_t i = 0; i < program->count; ++i) {
+        const FurryInstruction *ins = &program->code[i];
+        if (ins->op == FURRY_OP_UI_BEGIN) {
+            ui_depth++;
+        } else if (ins->op == FURRY_OP_UI_END) {
+            if (ui_depth <= 0) {
+                if (out_error != NULL) {
+                    out_error->line = (int)i + 1;
+                    snprintf(out_error->message, sizeof(out_error->message), "%s", "ui_end without matching ui_begin");
+                }
+                return FURRY_ERR;
+            }
+            ui_depth--;
+        }
+
+        if (ins->op == FURRY_OP_GOTO || ins->op == FURRY_OP_CALL || ins->op == FURRY_OP_IF_EQ || ins->op == FURRY_OP_BUTTON) {
+            const char *target = ins->op == FURRY_OP_IF_EQ ? ins->c : ins->a;
+            if (ins->op == FURRY_OP_BUTTON) {
+                target = ins->c;
+            }
+            if (find_label(program, target) < 0) {
+                if (out_error != NULL) {
+                    out_error->line = (int)i + 1;
+                    snprintf(out_error->message, sizeof(out_error->message), "unknown label target '%.120s'", target);
+                }
+                return FURRY_ERR;
+            }
+        } else if (ins->op == FURRY_OP_CHOICE) {
+            for (size_t c = 0; c < ins->choice_count; ++c) {
+                if (find_label(program, ins->choices[c].target) < 0) {
+                    if (out_error != NULL) {
+                        out_error->line = (int)i + 1;
+                        snprintf(out_error->message, sizeof(out_error->message), "unknown choice label target '%.120s'", ins->choices[c].target);
+                    }
+                    return FURRY_ERR;
+                }
+            }
+        }
+    }
+
+    if (ui_depth != 0) {
+        if (out_error != NULL) {
+            out_error->line = (int)program->count;
+            snprintf(out_error->message, sizeof(out_error->message), "%s", "unclosed ui_begin block");
+        }
         return FURRY_ERR;
+    }
+
+    return FURRY_OK;
+}
+
+static int compile_script_internal(const char *script, FurryProgram *out_program, FurryCompileError *out_error) {
+    if (script == NULL || out_program == NULL) {
+        if (out_error != NULL) {
+            out_error->line = 0;
+            snprintf(out_error->message, sizeof(out_error->message), "%s", "script or output program is null");
+        }
+        return FURRY_ERR;
+    }
+
+    if (out_error != NULL) {
+        out_error->line = 0;
+        out_error->message[0] = '\0';
     }
 
     out_program->code = NULL;
@@ -88,8 +177,10 @@ int furry_compile_script(const char *script, FurryProgram *out_program) {
     }
     strcpy(buffer, script);
 
+    int line_number = 0;
     char *line = strtok(buffer, "\n");
     while (line != NULL) {
+        line_number++;
         trim(line);
         if (line[0] == '\0' || line[0] == '#') {
             line = strtok(NULL, "\n");
@@ -196,6 +287,186 @@ int furry_compile_script(const char *script, FurryProgram *out_program) {
             if (safe_copy(ins.a, sizeof(ins.a), line + 3) != FURRY_OK) {
                 goto compile_error;
             }
+        } else if (strncmp(line, "fg ", 3) == 0) {
+            ins.op = FURRY_OP_FG;
+            char temp[FURRY_MAX_TEXT * 2];
+            if (safe_copy(temp, sizeof(temp), line + 3) != FURRY_OK) {
+                goto compile_error;
+            }
+            char *asset = temp;
+            char *x = split_once(asset, '|');
+            char *y = x == NULL ? NULL : split_once(x, '|');
+            char *rotation = y == NULL ? NULL : split_once(y, '|');
+            char *anim = rotation == NULL ? NULL : split_once(rotation, '|');
+            if (asset == NULL || x == NULL || y == NULL || rotation == NULL || anim == NULL) {
+                goto compile_error;
+            }
+            trim(asset);
+            trim(x);
+            trim(y);
+            trim(rotation);
+            trim(anim);
+            if (safe_copy(ins.a, sizeof(ins.a), asset) != FURRY_OK ||
+                safe_copy(ins.b, sizeof(ins.b), x) != FURRY_OK ||
+                safe_copy(ins.c, sizeof(ins.c), y) != FURRY_OK ||
+                safe_copy(ins.choices[0].text, sizeof(ins.choices[0].text), rotation) != FURRY_OK ||
+                safe_copy(ins.choices[0].target, sizeof(ins.choices[0].target), anim) != FURRY_OK) {
+                goto compile_error;
+            }
+        } else if (strncmp(line, "button ", 7) == 0) {
+            ins.op = FURRY_OP_BUTTON;
+            char temp[FURRY_MAX_TEXT * 2];
+            if (safe_copy(temp, sizeof(temp), line + 7) != FURRY_OK) {
+                goto compile_error;
+            }
+            char *id = temp;
+            char *label = split_once(id, '|');
+            char *target = label == NULL ? NULL : split_once(label, '|');
+            if (id == NULL || label == NULL || target == NULL) {
+                goto compile_error;
+            }
+            trim(id);
+            trim(label);
+            trim(target);
+            if (safe_copy(ins.a, sizeof(ins.a), id) != FURRY_OK ||
+                safe_copy(ins.b, sizeof(ins.b), label) != FURRY_OK ||
+                safe_copy(ins.c, sizeof(ins.c), target) != FURRY_OK) {
+                goto compile_error;
+            }
+        } else if (strncmp(line, "ui_begin ", 9) == 0) {
+            ins.op = FURRY_OP_UI_BEGIN;
+            trim(line + 9);
+            if (safe_copy(ins.a, sizeof(ins.a), line + 9) != FURRY_OK) {
+                goto compile_error;
+            }
+        } else if (strcmp(line, "ui_end") == 0) {
+            ins.op = FURRY_OP_UI_END;
+        } else if (strncmp(line, "ui_panel ", 9) == 0) {
+            ins.op = FURRY_OP_UI_PANEL;
+            char temp[FURRY_MAX_TEXT * 2];
+            if (safe_copy(temp, sizeof(temp), line + 9) != FURRY_OK) {
+                goto compile_error;
+            }
+            char *id = temp;
+            char *x = split_once(id, '|');
+            char *y = x == NULL ? NULL : split_once(x, '|');
+            char *w = y == NULL ? NULL : split_once(y, '|');
+            char *h = w == NULL ? NULL : split_once(w, '|');
+            if (id == NULL || x == NULL || y == NULL || w == NULL || h == NULL) {
+                goto compile_error;
+            }
+            trim(id);
+            trim(x);
+            trim(y);
+            trim(w);
+            trim(h);
+            if (safe_copy(ins.a, sizeof(ins.a), id) != FURRY_OK ||
+                safe_copy(ins.b, sizeof(ins.b), x) != FURRY_OK ||
+                safe_copy(ins.c, sizeof(ins.c), y) != FURRY_OK ||
+                safe_copy(ins.choices[0].text, sizeof(ins.choices[0].text), w) != FURRY_OK ||
+                safe_copy(ins.choices[0].target, sizeof(ins.choices[0].target), h) != FURRY_OK) {
+                goto compile_error;
+            }
+        } else if (strncmp(line, "ui_text ", 8) == 0) {
+            ins.op = FURRY_OP_UI_TEXT;
+            char temp[FURRY_MAX_TEXT * 2];
+            if (safe_copy(temp, sizeof(temp), line + 8) != FURRY_OK) {
+                goto compile_error;
+            }
+            char *id = temp;
+            char *text = split_once(id, '|');
+            if (id == NULL || text == NULL) {
+                goto compile_error;
+            }
+            trim(id);
+            trim(text);
+            if (safe_copy(ins.a, sizeof(ins.a), id) != FURRY_OK ||
+                safe_copy(ins.b, sizeof(ins.b), text) != FURRY_OK) {
+                goto compile_error;
+            }
+        } else if (strncmp(line, "ui_image ", 9) == 0) {
+            ins.op = FURRY_OP_UI_IMAGE;
+            char temp[FURRY_MAX_TEXT * 2];
+            if (safe_copy(temp, sizeof(temp), line + 9) != FURRY_OK) {
+                goto compile_error;
+            }
+            char *id = temp;
+            char *asset = split_once(id, '|');
+            if (id == NULL || asset == NULL) {
+                goto compile_error;
+            }
+            trim(id);
+            trim(asset);
+            if (!has_supported_media_extension(asset)) {
+                goto compile_error;
+            }
+            if (safe_copy(ins.a, sizeof(ins.a), id) != FURRY_OK ||
+                safe_copy(ins.b, sizeof(ins.b), asset) != FURRY_OK) {
+                goto compile_error;
+            }
+        } else if (strncmp(line, "ui_anim ", 8) == 0) {
+            ins.op = FURRY_OP_UI_ANIM;
+            char temp[FURRY_MAX_TEXT * 2];
+            if (safe_copy(temp, sizeof(temp), line + 8) != FURRY_OK) {
+                goto compile_error;
+            }
+            char *id = temp;
+            char *asset = split_once(id, '|');
+            char *mode = asset == NULL ? NULL : split_once(asset, '|');
+            if (id == NULL || asset == NULL || mode == NULL) {
+                goto compile_error;
+            }
+            trim(id);
+            trim(asset);
+            trim(mode);
+            if (!has_supported_media_extension(asset)) {
+                goto compile_error;
+            }
+            if (safe_copy(ins.a, sizeof(ins.a), id) != FURRY_OK ||
+                safe_copy(ins.b, sizeof(ins.b), asset) != FURRY_OK ||
+                safe_copy(ins.c, sizeof(ins.c), mode) != FURRY_OK) {
+                goto compile_error;
+            }
+        } else if (strncmp(line, "ui_video ", 9) == 0) {
+            ins.op = FURRY_OP_UI_VIDEO;
+            char temp[FURRY_MAX_TEXT * 2];
+            if (safe_copy(temp, sizeof(temp), line + 9) != FURRY_OK) {
+                goto compile_error;
+            }
+            char *id = temp;
+            char *asset = split_once(id, '|');
+            char *loop = asset == NULL ? NULL : split_once(asset, '|');
+            if (id == NULL || asset == NULL || loop == NULL) {
+                goto compile_error;
+            }
+            trim(id);
+            trim(asset);
+            trim(loop);
+            if (!has_supported_media_extension(asset)) {
+                goto compile_error;
+            }
+            if (safe_copy(ins.a, sizeof(ins.a), id) != FURRY_OK ||
+                safe_copy(ins.b, sizeof(ins.b), asset) != FURRY_OK ||
+                safe_copy(ins.c, sizeof(ins.c), loop) != FURRY_OK) {
+                goto compile_error;
+            }
+        } else if (strncmp(line, "ui_bind ", 8) == 0) {
+            ins.op = FURRY_OP_UI_BIND;
+            char temp[FURRY_MAX_TEXT * 2];
+            if (safe_copy(temp, sizeof(temp), line + 8) != FURRY_OK) {
+                goto compile_error;
+            }
+            char *id = temp;
+            char *key = split_once(id, '|');
+            if (id == NULL || key == NULL) {
+                goto compile_error;
+            }
+            trim(id);
+            trim(key);
+            if (safe_copy(ins.a, sizeof(ins.a), id) != FURRY_OK ||
+                safe_copy(ins.b, sizeof(ins.b), key) != FURRY_OK) {
+                goto compile_error;
+            }
         } else if (strncmp(line, "music ", 6) == 0) {
             ins.op = FURRY_OP_MUSIC;
             trim(line + 6);
@@ -206,6 +477,18 @@ int furry_compile_script(const char *script, FurryProgram *out_program) {
             ins.op = FURRY_OP_SFX;
             trim(line + 4);
             if (safe_copy(ins.a, sizeof(ins.a), line + 4) != FURRY_OK) {
+                goto compile_error;
+            }
+        } else if (strncmp(line, "save ", 5) == 0) {
+            ins.op = FURRY_OP_SAVE;
+            trim(line + 5);
+            if (safe_copy(ins.a, sizeof(ins.a), line + 5) != FURRY_OK) {
+                goto compile_error;
+            }
+        } else if (strncmp(line, "load ", 5) == 0) {
+            ins.op = FURRY_OP_LOAD;
+            trim(line + 5);
+            if (safe_copy(ins.a, sizeof(ins.a), line + 5) != FURRY_OK) {
                 goto compile_error;
             }
         } else if (strncmp(line, "choice ", 7) == 0) {
@@ -263,13 +546,31 @@ int furry_compile_script(const char *script, FurryProgram *out_program) {
         continue;
 
 compile_error:
+        if (out_error != NULL) {
+            out_error->line = line_number;
+            snprintf(out_error->message, sizeof(out_error->message), "%s", "invalid syntax, malformed command, or unsupported media extension");
+        }
         furry_free_program(out_program);
         free(buffer);
         return FURRY_ERR;
     }
 
     free(buffer);
+
+    if (validate_program_references(out_program, out_error) != FURRY_OK) {
+        furry_free_program(out_program);
+        return FURRY_ERR;
+    }
+
     return FURRY_OK;
+}
+
+int furry_compile_script(const char *script, FurryProgram *out_program) {
+    return compile_script_internal(script, out_program, NULL);
+}
+
+int furry_compile_script_ex(const char *script, FurryProgram *out_program, FurryCompileError *out_error) {
+    return compile_script_internal(script, out_program, out_error);
 }
 
 static int find_label(const FurryProgram *program, const char *label) {
@@ -338,6 +639,9 @@ int furry_run_program(const FurryProgram *program, const FurryRuntimeConfig *con
     memset(&state, 0, sizeof(state));
 
     int (*choose_fn)(const char *, const FurryChoice *, size_t, void *) = choose_default;
+    int (*host_fn)(FurryOpCode, const FurryInstruction *, const FurryRuntimeSnapshot *, void *) = NULL;
+    int (*save_fn)(const char *, const FurryRuntimeSnapshot *, void *) = NULL;
+    int (*load_fn)(const char *, FurryRuntimeSnapshot *, void *) = NULL;
     void *choice_user_data = NULL;
     if (config != NULL) {
         if (config->max_steps > 0) {
@@ -346,6 +650,9 @@ int furry_run_program(const FurryProgram *program, const FurryRuntimeConfig *con
         if (config->choose_option != NULL) {
             choose_fn = config->choose_option;
         }
+        host_fn = config->on_host_command;
+        save_fn = config->save_slot;
+        load_fn = config->load_slot;
         choice_user_data = config->user_data;
     }
 
@@ -407,16 +714,94 @@ int furry_run_program(const FurryProgram *program, const FurryRuntimeConfig *con
                 }
                 break;
             case FURRY_OP_BG:
-                printf("[BG] %s\n", ins->a);
+                if (host_fn != NULL) {
+                    if (host_fn(ins->op, ins, &state.snap, choice_user_data) != FURRY_OK) {
+                        return FURRY_ERR;
+                    }
+                } else {
+                    printf("[BG] %s\n", ins->a);
+                }
+                state.snap.ip++;
+                break;
+            case FURRY_OP_FG:
+                if (host_fn != NULL) {
+                    if (host_fn(ins->op, ins, &state.snap, choice_user_data) != FURRY_OK) {
+                        return FURRY_ERR;
+                    }
+                } else {
+                    printf("[FG] asset=%s x=%s y=%s rot=%s anim=%s\n", ins->a, ins->b, ins->c, ins->choices[0].text, ins->choices[0].target);
+                }
+                state.snap.ip++;
+                break;
+            case FURRY_OP_BUTTON:
+                if (host_fn != NULL) {
+                    if (host_fn(ins->op, ins, &state.snap, choice_user_data) != FURRY_OK) {
+                        return FURRY_ERR;
+                    }
+                } else {
+                    printf("[BUTTON] id=%s label=%s action=%s\n", ins->a, ins->b, ins->c);
+                }
+                state.snap.ip++;
+                break;
+            case FURRY_OP_UI_BEGIN:
+            case FURRY_OP_UI_END:
+            case FURRY_OP_UI_PANEL:
+            case FURRY_OP_UI_TEXT:
+            case FURRY_OP_UI_IMAGE:
+            case FURRY_OP_UI_ANIM:
+            case FURRY_OP_UI_VIDEO:
+            case FURRY_OP_UI_BIND:
+                if (host_fn != NULL) {
+                    if (host_fn(ins->op, ins, &state.snap, choice_user_data) != FURRY_OK) {
+                        return FURRY_ERR;
+                    }
+                } else {
+                    printf("[UI] op=%d a=%s b=%s c=%s\n", (int)ins->op, ins->a, ins->b, ins->c);
+                }
                 state.snap.ip++;
                 break;
             case FURRY_OP_MUSIC:
-                printf("[MUSIC:miniaudio] %s\n", ins->a);
+                if (host_fn != NULL) {
+                    if (host_fn(ins->op, ins, &state.snap, choice_user_data) != FURRY_OK) {
+                        return FURRY_ERR;
+                    }
+                } else {
+                    printf("[MUSIC:miniaudio] %s\n", ins->a);
+                }
                 state.snap.ip++;
                 break;
             case FURRY_OP_SFX:
-                printf("[SFX:miniaudio] %s\n", ins->a);
+                if (host_fn != NULL) {
+                    if (host_fn(ins->op, ins, &state.snap, choice_user_data) != FURRY_OK) {
+                        return FURRY_ERR;
+                    }
+                } else {
+                    printf("[SFX:miniaudio] %s\n", ins->a);
+                }
                 state.snap.ip++;
+                break;
+            case FURRY_OP_SAVE:
+                if (save_fn != NULL) {
+                    if (save_fn(ins->a, &state.snap, choice_user_data) != FURRY_OK) {
+                        return FURRY_ERR;
+                    }
+                } else {
+                    printf("[SAVE] slot=%s ip=%zu vars=%zu\n", ins->a, state.snap.ip, state.snap.var_count);
+                }
+                state.snap.ip++;
+                break;
+            case FURRY_OP_LOAD:
+                if (load_fn != NULL) {
+                    if (load_fn(ins->a, &state.snap, choice_user_data) != FURRY_OK) {
+                        return FURRY_ERR;
+                    }
+                    if (state.snap.ip >= program->count) {
+                        return FURRY_ERR;
+                    }
+                } else {
+                    printf("[LOAD] slot=%s (no loader configured, ignored)\n", ins->a);
+                    state.snap.ip++;
+                }
                 break;
             case FURRY_OP_CHOICE: {
                 int selected = choose_fn(ins->a, ins->choices, ins->choice_count, choice_user_data);
@@ -471,6 +856,10 @@ int furry_snapshot_load(const char *text, FurryRuntimeSnapshot *out_snapshot) {
     out_snapshot->callstack_depth = depth;
     out_snapshot->var_count = vars;
     return FURRY_OK;
+}
+
+int furry_media_is_supported(const char *asset_path) {
+    return has_supported_media_extension(asset_path);
 }
 
 void furry_free_program(FurryProgram *program) {

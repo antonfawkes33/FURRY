@@ -4,7 +4,7 @@ This repository now ships a stronger VN runtime core aimed at Ren'Py parity targ
 
 ## Engine direction
 - **Language/runtime core:** C11
-- **Rendering target:** Vulkan (integration flag present, renderer module planned)
+- **Rendering target:** Vulkan (the real renderer target; scripts/Lua drive scene/UI intent, frontend executes with Vulkan)
 - **Platform/input windowing target:** SDL3 (integration flag present, backend module planned)
 - **Audio recommendation:** **miniaudio** (single-file, open-source, royalty-free)
 
@@ -17,22 +17,40 @@ This repository now ships a stronger VN runtime core aimed at Ren'Py parity targ
 - `add key=int`
 - `if_eq key|value|label`
 - `bg background_id`
+- `fg sprite.png|x|y|rotation|animation`
+- `button id|label|target_label`
+- `ui_begin layer_id` / `ui_end`
+- `ui_panel id|x|y|w|h`
+- `ui_text id|text`
+- `ui_image id|asset`
+- `ui_anim id|asset|play_mode`
+- `ui_video id|asset|loop_flag`
+- `ui_bind id|state_key`
 - `music track.ogg`
 - `sfx click.wav`
+- `save slot_name` / `load slot_name`
 - `choice Prompt|Option->label|Option->label` (multi-choice)
 - `end`
 
 ## Parity-focused runtime upgrades included
 - Choice callback hook in `FurryRuntimeConfig` for UI-driven selection.
+- Host command callback hook for renderer/UI actions (`bg`, `fg`, `button`, `music`, `sfx`).
+- Advanced UI host operations (`ui_begin`, `ui_panel`, `ui_text`, `ui_image`, `ui_anim`, `ui_video`, `ui_bind`) for script-defined UI composition.
 - Call stack support (`call`/`return`) for reusable scene blocks.
-- Runtime snapshot encode/decode utilities (`furry_snapshot_save/load`) as a base for save/load systems.
+- Runtime snapshot encode/decode utilities (`furry_snapshot_save/load`) plus `save_slot`/`load_slot` hooks for game save flows.
 
-## Stylish base main menu
-`furry_ui` provides a modern menu theme schema:
-- gradient colors
-- accent palette
-- typography slots
-- semantic actions (`new_game`, `continue`, `scenes`, `mods`, `settings`, `quit`)
+## Engine boundary (important)
+- FURRY does **not** ship built-in game UI presets/themes/widgets as an engine feature.
+- FURRY provides runtime script execution + host callback hooks so each game author builds their own UI/frontend.
+- Direction choice: use a Lua authoring frontend that maps into this runtime model (Lua-first authoring, engine-managed execution).
+- Window resizing + responsive UI are frontend responsibilities (typically through normalized coordinates and layout logic authored in Lua/script and rendered by Vulkan).
+
+## Diagnostics and media support
+- `furry_compile_script_ex` reports line-based compile errors with clear reasons.
+- `furry_media_is_supported` validates free/common media extensions for images/animation/video (`png`, `jpg`, `jpeg`, `webp`, `gif`, `apng`, `webm`, `mp4`, `m4v`, `flv`, `anim`).
+
+## Authoring guide
+- See `docs/LUA_UI_AUTHORING_GUIDE.md` for an AI/human focused specification and examples to build UI/gameplay scripts.
 
 ## Build on Windows
 ### Batch
@@ -44,6 +62,11 @@ scripts\build_windows.bat Release
 ```powershell
 ./scripts/build_windows.ps1 -Configuration Release
 ```
+
+### Better Windows generator detection + DLL copy
+- Build scripts auto-detect Visual Studio 2022/2019 with `vswhere` and fall back to `Ninja`.
+- Scripts stop stale `furry_app`/`test_furry` processes before building to avoid lingering background runs.
+- Set `FURRY_DLLS` (semicolon-separated) or use PowerShell `-RuntimeDlls` to copy required runtime DLLs into build output (`build/bin`).
 
 ### Manual
 ```bat
@@ -57,5 +80,5 @@ ctest --test-dir build -C Release --output-on-failure
 cmake -S . -B build
 cmake --build build
 ctest --test-dir build --output-on-failure
-./build/furry_app
+./build/bin/furry_app
 ```
