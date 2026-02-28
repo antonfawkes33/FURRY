@@ -50,6 +50,17 @@ set_target_properties(furry_app test_furry PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin
 )
 
+# Backward-compatible legacy output copies for existing tooling that expects
+# executables at the build root (e.g. ./build/furry_app).
+add_custom_command(TARGET furry_app POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        "$<TARGET_FILE:furry_app>"
+        "${CMAKE_BINARY_DIR}/$<TARGET_FILE_NAME:furry_app>")
+add_custom_command(TARGET test_furry POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        "$<TARGET_FILE:test_furry>"
+        "${CMAKE_BINARY_DIR}/$<TARGET_FILE_NAME:test_furry>")
+
 if(FURRY_RUNTIME_DLLS)
     foreach(_dll IN LISTS FURRY_RUNTIME_DLLS)
         if(EXISTS "${_dll}")

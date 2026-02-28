@@ -82,3 +82,6 @@ cmake --build build
 ctest --test-dir build --output-on-failure
 ./build/bin/furry_app
 ```
+
+Compatibility note: `furry_app` and `test_furry` are also copied to `./build/`
+to avoid breaking older local scripts during migration to `./build/bin`.
