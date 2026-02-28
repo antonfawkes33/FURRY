@@ -7,7 +7,7 @@ This file is the engine-facing authoring spec for building UI and gameplay decla
 ## Distribution model (BYO game UI)
 - Engine binaries (`exe`/`dll`) are runtime infrastructure.
 - Game creators work in their own game folder (`scripts`, `assets`, `saves`) and define all UI themselves.
-- The engine executes script + state; your frontend (Vulkan renderer target) decides visuals, widgets, layout, and interaction style.
+- The engine executes script + state; your frontend decides visuals, widgets, layout, and interaction style.
 
 ## Goals
 - Script defines scene flow, UI tree, bindings, animation/video usage, and save/load triggers.
@@ -47,7 +47,6 @@ This file is the engine-facing authoring spec for building UI and gameplay decla
 - `x`, `y`, `w`, `h` are host-interpreted numeric strings (recommended normalized 0..1).
 - `play_mode` examples: `loop`, `once`, `pingpong` (host decides exact behavior).
 - `loop_flag` values: `0` or `1`.
-- For resizable windows, keep UI authored in normalized space and recompute pixel layout in frontend on resize events.
 
 ## Supported free/common media extensions
 Use assets with these extensions to pass compile-time media checks:

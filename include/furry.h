@@ -99,6 +99,5 @@ void furry_free_program(FurryProgram *program);
 int furry_snapshot_save(const FurryRuntimeSnapshot *snapshot, char *out_text, size_t out_size);
 int furry_snapshot_load(const char *text, FurryRuntimeSnapshot *out_snapshot);
 int furry_media_is_supported(const char *asset_path);
-const char *furry_audio_backend_name(void);
 
 #endif

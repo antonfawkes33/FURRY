@@ -30,8 +30,6 @@ static int host_dispatch(FurryOpCode op, const FurryInstruction *ins, const Furr
 
 int main(void) {
     printf("FURRY version: %s\n", furry_version());
-    printf("Renderer target: Vulkan (frontend-owned implementation)\n");
-    printf("Audio backend target: %s\n", furry_audio_backend_name());
 
     const char *script =
         "boot:\n"

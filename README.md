@@ -43,7 +43,6 @@ This repository now ships a stronger VN runtime core aimed at Ren'Py parity targ
 - FURRY does **not** ship built-in game UI presets/themes/widgets as an engine feature.
 - FURRY provides runtime script execution + host callback hooks so each game author builds their own UI/frontend.
 - Direction choice: use a Lua authoring frontend that maps into this runtime model (Lua-first authoring, engine-managed execution).
-- Window resizing + responsive UI are frontend responsibilities (typically through normalized coordinates and layout logic authored in Lua/script and rendered by Vulkan).
 
 ## Diagnostics and media support
 - `furry_compile_script_ex` reports line-based compile errors with clear reasons.
