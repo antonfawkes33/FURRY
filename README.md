@@ -4,7 +4,7 @@ This repository now ships a stronger VN runtime core aimed at Ren'Py parity targ
 
 ## Engine direction
 - **Language/runtime core:** C11
-- **Rendering target:** Vulkan (integration flag present, renderer module planned)
+- **Rendering target:** Vulkan (the real renderer target; scripts/Lua drive scene/UI intent, frontend executes with Vulkan)
 - **Platform/input windowing target:** SDL3 (integration flag present, backend module planned)
 - **Audio recommendation:** **miniaudio** (single-file, open-source, royalty-free)
 
@@ -62,6 +62,11 @@ scripts\build_windows.bat Release
 ./scripts/build_windows.ps1 -Configuration Release
 ```
 
+### Better Windows generator detection + DLL copy
+- Build scripts auto-detect Visual Studio 2022/2019 with `vswhere` and fall back to `Ninja`.
+- Scripts stop stale `furry_app`/`test_furry` processes before building to avoid lingering background runs.
+- Set `FURRY_DLLS` (semicolon-separated) or use PowerShell `-RuntimeDlls` to copy required runtime DLLs into build output (`build/bin`).
+
 ### Manual
 ```bat
 cmake -S . -B build -G "Visual Studio 17 2022" -A x64
@@ -74,5 +79,8 @@ ctest --test-dir build -C Release --output-on-failure
 cmake -S . -B build
 cmake --build build
 ctest --test-dir build --output-on-failure
-./build/furry_app
+./build/bin/furry_app
 ```
+
+Compatibility note: `furry_app` and `test_furry` are also copied to `./build/`
+to avoid breaking older local scripts during migration to `./build/bin`.

@@ -5,13 +5,15 @@ set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 set(CMAKE_C_EXTENSIONS OFF)
 
-option(FURRY_ENABLE_VULKAN "Enable Vulkan renderer integration (stub for now)" OFF)
+option(FURRY_ENABLE_VULKAN "Enable Vulkan renderer integration target" ON)
 option(FURRY_ENABLE_SDL3 "Enable SDL3 platform integration (stub for now)" OFF)
 option(FURRY_ENABLE_MINIAUDIO "Enable miniaudio integration hooks" ON)
+set(FURRY_RUNTIME_DLLS "" CACHE STRING "Semicolon-separated runtime DLL paths copied to output directories")
 
 add_library(furry_lib STATIC
     src/furry.c
     src/furry_ui.c
+    src/furry_audio_miniaudio.c
 )
 
 target_include_directories(furry_lib PUBLIC include)
@@ -43,3 +45,34 @@ enable_testing()
 add_executable(test_furry tests/test_furry.c)
 target_link_libraries(test_furry PRIVATE furry_lib)
 add_test(NAME test_furry COMMAND test_furry)
+
+set_target_properties(furry_app test_furry PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin
+)
+
+# Backward-compatible legacy output copies for existing tooling that expects
+# executables at the build root (e.g. ./build/furry_app).
+add_custom_command(TARGET furry_app POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        "$<TARGET_FILE:furry_app>"
+        "${CMAKE_BINARY_DIR}/$<TARGET_FILE_NAME:furry_app>")
+add_custom_command(TARGET test_furry POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        "$<TARGET_FILE:test_furry>"
+        "${CMAKE_BINARY_DIR}/$<TARGET_FILE_NAME:test_furry>")
+
+if(FURRY_RUNTIME_DLLS)
+    foreach(_dll IN LISTS FURRY_RUNTIME_DLLS)
+        if(EXISTS "${_dll}")
+            add_custom_command(TARGET furry_app POST_BUILD
+                COMMAND ${CMAKE_COMMAND} -E copy_if_different "${_dll}" "$<TARGET_FILE_DIR:furry_app>")
+            add_custom_command(TARGET test_furry POST_BUILD
+                COMMAND ${CMAKE_COMMAND} -E copy_if_different "${_dll}" "$<TARGET_FILE_DIR:test_furry>")
+        else()
+            message(WARNING "FURRY_RUNTIME_DLLS entry not found: ${_dll}")
+        endif()
+    endforeach()
+endif()
+
+message(STATUS "FURRY renderer target: Vulkan=${FURRY_ENABLE_VULKAN}, SDL3=${FURRY_ENABLE_SDL3}")
+message(STATUS "FURRY audio backend target: miniaudio=${FURRY_ENABLE_MINIAUDIO}")

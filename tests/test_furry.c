@@ -49,6 +49,7 @@ static int load_slot(const char *slot, FurryRuntimeSnapshot *snapshot, void *use
 
 int main(void) {
     assert(strcmp(furry_version(), "0.4.0") == 0);
+    assert(strcmp(furry_audio_backend_name(), "miniaudio") == 0 || strcmp(furry_audio_backend_name(), "none") == 0);
 
     const char *script =
         "start:\n"
